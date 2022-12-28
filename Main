@@ -1,0 +1,32 @@
+import { Quat, RotateAnimation, TapGesture, SwipeGesture, VoiceCommands } from "lens-store";
+import { AudioClip, AudioPlayer } from "lens-store/audio";
+import { ConnectedLenses, CustomLandmarker } from "lens-store/lenses";
+import { ExternalAPI } from "lens-store/apis";
+import SnapML from "lens-store/ml";
+
+// 1. First, we will create a Remote Asset in Lens Studio
+// To do this, go to the Assets tab and click on the "Create Remote Asset" button
+// In this example, we will use a 3D model as our Remote Asset
+const remoteModel = Scene.root.createRemoteObject("myRemoteModel", "https://mywebsite.com/models/myModel.glb");
+
+// 2. Next, we will enable 3D body and hand tracking for our Lens
+// To do this, go to the Settings tab and check the "Body Tracking" and "Hand Tracking" options
+// This will allow our Lens to track the user's body and hand movements
+
+// 3. We can also use segmentations to separate different parts of the user's body and apply different effects to them
+// For example, we can create a script that changes the color of the user's shirt based on their hand movements
+const shirtSegmentation = Scene.root.find("ShirtSegmentation");
+shirtSegmentation.material.baseColor = new Color(1, 0, 0); // red
+
+// 4. We can create multiplayer experiences using Connected Lenses
+// To do this, we will use the Connected Lenses API to communicate with other Lenses in the same location or remotely
+const connectedLenses = ConnectedLenses.getInstance();
+
+// 5. We can use SnapML to recognize the environment and objects and offer relatable experiences
+// For example, we can use the Object Detection model to recognize objects in the scene and display relevant information about them
+const objectDetection = SnapML.import("Object Detection");
+
+// 6. We can leverage various inputs to interact with our AR experience
+// For example, we can use voice commands, hand gestures, and screen taps to control our Lens
+const voiceCommands = new VoiceCommands("myCommands");
+const tapGest
